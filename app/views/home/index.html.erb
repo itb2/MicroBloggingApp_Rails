@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Bloggy</title>
+</head>
+<body>
+
+	<h1><div id="title">Welcome to Bloggy!</div></h1>
+
+	<div id='wrapper'>
+		
+		<div id="sign-in">
+			<form id="signInform" method='post' action='/users'>
+				<div class="inputs">
+					<label class="welcPg">Email:</label>
+					<input class="welcPg" type="email" name="email" required>
+				</div>
+				<div class="inputs">
+					<label class="welcPg" >Password:</label>
+					<input class="welcPg" type="password" name="password" required>
+				</div>
+				<button id="signin" type="Submit" name='Submit'>Sign In</button>
+			</form>
+
+		</div>
+		<div id="reg">
+			<p id="regLink">Don't have an account? <a href="/users/new">Click Here To Register >> </a></p>
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>
