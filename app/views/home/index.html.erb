@@ -10,7 +10,9 @@
 	<div id='wrapper'>
 		
 		<div id="sign-in">
-			<form id="signInform" method='post' action='/users'>
+			<h4 style="color:red"> <%= flash[:alert] if flash[:alert] %> </h4>
+			<form id="signInform" method='post' action='/login'>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 				<div class="inputs">
 					<label class="welcPg">Email:</label>
 					<input class="welcPg" type="email" name="email" required>

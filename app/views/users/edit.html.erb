@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Settings</title>
+</head>
+<body>
+	<div id="menu">
+		<a href='/home/feed'><div class="menuIcons">Home</div></a>
+		<a href='/sign-out'><div class="menuIcons">Log Out</div></a>
+	</div>
+
+	
+	<form method='post' action='/users/<%= @user.id %>/edit'>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			<div class="formpart">
+				<label class="regform">First Name:</label>
+				<input class='regform' type="name" name="fname" value="<%= @user.fname %>" required>
+				<label class='regform'>Last Name:</label>
+				<input class='regform' type="name" name="lname" value="<%= @user.lname %>" required>
+			</div>
+			<div class="formpart">
+				<label class='regform'>Email:</label>
+				<input class='regform' type="email" name="email" value="<%= @user.email %>" required>
+				<label class='regform'>Password:</label>
+				<input class='regform' type="password" name="password"  value="<%= @user.password %>" required>
+			</div>
+			<div class="formpart">
+				<label class='regform'>Location</label>
+				<input class='regform' type="text" name="location" value="<%= @user.location %>">
+				<label class='regform'>Birthday</label>
+				<input class='regform' type="date" name="birthday" value="<%= @user.birthday %>">
+			</div>
+			<div class="formpart">
+				<label class='regform'>Bio:</label>
+				<input class='regform' name="bio" type="bio" value="<%= @user.bio %>"></input>
+			</div>
+			<button type=submit id="signin">Update</button>
+	</form>
+	<%= button_to 'DELETE ACCOUNT', @user, :method => 'delete', data: { confirm: 'Are you sure?' } %>
+
+</body>
+</html>

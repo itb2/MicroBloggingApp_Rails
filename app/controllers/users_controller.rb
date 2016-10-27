@@ -5,21 +5,28 @@ class UsersController < ApplicationController
 		#display the users
 	end
 
+
 	def create
 		#/users -> post request
 		#create a user -add them to the database
-		User.create(
-		email: params[:email],
-		password: params[:password],
-		fname: params[:fname],
-		lname: params[:lname],
-		location: params[:location],
-		bio: params[:bio],
-		birthday: params[:birthday].to_s,
-		joined_at: DateTime.now
-		)
-
-		redirect '/'
+		@thingy = User.where(email: params[:email]).first
+		if @thingy == nil
+			User.create(
+			email: params[:email],
+			password: params[:password],
+			fname: params[:fname],
+			lname: params[:lname],
+			location: params[:location],
+			bio: params[:bio],
+			birthday: params[:birthday].to_s,
+			joined_at: DateTime.now
+			)
+			redirect_to '/'
+		else
+			flash[:alert] = "A user already exists with that email!"
+			redirect_to :back
+		end
+		
 	end
 
 	def new
@@ -28,23 +35,37 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@user = User.where(id: session[:user_id]).first
 		#/users/:id/edit 
 		#Go to a page where you edit users -settings
 	end
 
+	def editing
+		User.update(
+		email: params[:email],
+		password: params[:password],
+		fname: params[:fname],
+		lname: params[:lname],
+		location: params[:location],
+		bio: params[:bio],
+		birthday: params[:birthday],
+		)
+		redirect_to '/home/feed'
+	end
+
+
 	def show
+		@user1 = User.where(id: params[:id]).first
 		#/users/:id
 		#Go to a users profile
 	end
 
-	def update
-		#/users/:id -> Put/Patch request
-		#actually edit the users submission to settiings
-	end
 
 	def destroy
 		#/users/:id -> Delete request
 		#delete/destroy a users
+		User.delete(params[:id])
+		redirect_to '/'
 	end
 
 end

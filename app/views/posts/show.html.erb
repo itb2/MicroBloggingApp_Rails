@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View Post</title>
+</head>
+<body>
+	<a href="/home/feed"> << back </a>
+	<h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
+	<h1><%= @post.title %></h1>
+	<a href="/users/<%= @author.id %>"><p>by <%= @author.fname %> <%= @author.lname %></p></a>
+	<p><%= @post.text %></p>
+	<%= button_to 'DELETE', @post, :method => 'delete' %>
+	<p><%= @post.posted_at %></p>
+	<h2>Comments:</h2>
+	<div id="comments">
+			<% Comment.where(post_id: @post.id).each do |x| %>
+			    <% @y = User.where(id: x.user_id).first %>
+				<div>
+					<%= button_to 'DELETE', x, :method => 'delete' %>
+			  		<h5><%= @y.fname %> <%= @y.lname %></h5></a>
+			  		<p><%= x.text %></p>
+			  		<p><%= x.posted_at %></p>
+			  	</div>
+			<% end %>
+	</div>
+	
+	<form  method="post" action='/comments'>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<input type="hidden" name="pid" value=<%= @post.id %> style="display:none">
+		<textarea name="comment" id="commentBox" maxlength="150" placeholder="Type your comment here... " required></textarea>
+		<button type=submit>Post</button>
+	</form>
+
+</body>
+</html>

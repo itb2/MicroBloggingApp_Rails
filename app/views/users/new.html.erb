@@ -5,7 +5,9 @@
 </head>
 <body>
 	<div id="regwrap">
+		<a href="/"> << back </a>
 		<h1>Register For Bloggy: Your own personal Blog Space</h1>
+		<h4 style="color:red"> <%= flash[:alert] if flash[:alert] %> </h4>
 		<form method='post' action='/users'>
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 			<div class="formpart">

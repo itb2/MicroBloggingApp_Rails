@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+	<div id="menu">
+		<a href='/home/feed'><div class="menuIcons">Home</div></a>
+		<a href='/sign-out'><div class="menuIcons">Log Out</div></a>
+		
+	</div>
+	<div id="feedPoster">
+	<h1><%= @user1.fname %> <%= @user1.lname %></h1>
+	<label><strong>Location: </strong></label><p><%= @user1.location %>  </p>
+	<label><strong>Birthday: </strong></label><p><%= @user1.birthday %></p><br/>
+	<label><strong>Bio: </strong></label><p><%= @user1.bio %></p>
+	<div>
+			<form  method="post" action='/posts'>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<input type="text" name="ptitle" placeholder="Title..." required>
+				<textarea name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+	 			<button type=submit id="signin">Post</button>
+			</form>
+		</div>
+		
+		<h1>Post Feed:</h1>
+        <h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
+		<div id="userPosts">
+			<% Post.where(user_id: @user1.id).reverse.each do |x| %>
+				<% @count = Comment.where(post_id: x.id).length %>
+			    <% @y = User.where(id: x.user_id).first %>
+				<a href="/posts/<%= x.id %>"><div style="border: 1px solid black; width: 400px; text-align: center;">
+					<%= button_to 'DELETE', x, :method => 'delete' %>
+			  		<h2><%= x.title %></h2>
+			  		<h3><%= @y.fname %> <%= @y.lname %></h3></a>
+			  		<p><%= x.text %></p>
+			  		<p><%= @count %> comment(s)</p>
+			  		<p><%= x.posted_at %></p>
+			  	</div></a>
+			<% end %>
+	</div>	</div>
+
+
+
+</body>
+</html>

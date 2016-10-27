@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bloggy: HomePage</title>
+	
+</head>
+<body>
+	<h1>Welcome, <%= @user.fname %>!</h1>
+	<div id="menu">
+		<a href='/users/<%= @user.id %>'><div class="menuIcons">Profile</div></a>
+		<a href='/users/<%= @user.id %>/edit'><div class="menuIcons">Settings</div></a>
+	</div>
+	<div id="feedPoster">
+		<div>
+			<form  method="post" action='/posts'>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<input type="text" name="ptitle" placeholder="Title..." required>
+				<textarea name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+	 			<button type=submit id="signin">Post</button>
+			</form>
+		</div>
+		
+		<h1>Timeline:</h1>
+		<div id="userPosts">
+
+
+			<% (Post.all).reverse.each do |x| %>
+			<% @y = User.where(id: x.user_id).first %>
+			<% @count = Comment.where(post_id: x.id).length %>
+				<a href="/posts/<%= x.id %>"><div style="border: 1px solid black; width: 400px; text-align: center">
+			  		<h2><%= x.title %></h2>
+			  		<a href="/users/<%= @y.id %>"><h3><%= @y.fname %> <%= @y.lname %></h3></a>
+			  		<p><%= x.text %></p>
+			  		<p><%= @count %> comment(s)</p>
+			  		<p><%= x.posted_at %></p>
+			  	</div></a>
+			<% end %>
+		</div>	
+	</div>
+	
+</body>
+</html>

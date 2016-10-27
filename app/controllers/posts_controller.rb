@@ -6,8 +6,18 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		#/users -> post request
-		#create a user -add them to the database
+		#/posts -> post request
+		#create a post -add them to the database
+		@user = User.where(id: session[:user_id]).first
+		Post.create(
+			user: @user,
+			text: params[:post],
+			title: params[:ptitle],
+			posted_at: DateTime.now
+
+	    )
+
+	    redirect_to :back
 	end
 
 	def new
@@ -21,8 +31,15 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		#/users/:id
-		#Go to a users profile
+		#/posts/:id
+		#Go to a post
+
+		@post = Post.where(id: params[:id]).first
+		if @post == nil
+			redirect_to '/home/feed'
+		else
+			@author = User.where(id: @post.user_id).first
+		end
 	end
 
 	def update
@@ -31,8 +48,16 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
-		#/users/:id -> Delete request
-		#delete/destroy a users
+		#/post/:id -> Delete request
+		#delete/destroy a post
+		@post = Post.where(id: params[:id]).first
+		if @post.user_id == session[:user_id]
+			Post.delete(params[:id])
+			redirect_to :back
+		else
+			flash[:notice] = "You cannot delete another user's post!"
+			redirect_to :back
+		end
 	end
 
 end

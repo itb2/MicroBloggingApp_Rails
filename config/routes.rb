@@ -7,5 +7,15 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :comments
+
+  post '/login' => 'home#login'
+
+  get '/sign-out' => 'home#logout'
+
+  get '/home/feed' => 'home#feed'
+
+  post 'users/:id/edit' => 'users#editing'
+
 
 end
