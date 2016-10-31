@@ -8,31 +8,30 @@
 		<a href="/"> << back </a>
 		<h1>Register For Bloggy: Your own personal Blog Space</h1>
 		<h4 style="color:red"> <%= flash[:alert] if flash[:alert] %> </h4>
-		<form method='post' action='/users'>
-			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<%= form_for(@user) do |f| %>
 			<div class="formpart">
-				<label class="regform">First Name:</label>
-				<input class='regform' type="name" name="fname" required>
-				<label class='regform'>Last Name:</label>
-				<input class='regform' type="name" name="lname" required>
+				<%= f.label :first , 'First Name' %>
+				<%= f.text_field :fname, required: true%>
+				<%= f.label :last , 'Last Name' %>
+				<%= f.text_field :lname %>
 			</div>
 			<div class="formpart">
-				<label class='regform'>Email:</label>
-				<input class='regform' type="email" name="email" required>
-				<label class='regform'>Password:</label>
-				<input class='regform' type="password" name="password" required>
+				<%= f.label :email%>
+				<%= f.email_field :email %>
+				<%= f.label :password %>
+				<%= f.password_field :password %>
 			</div>
 			<div class="formpart">
-				<label class='regform'>Location</label>
-				<input class='regform' type="text" name="location">
-				<label class='regform'>Birthday</label>
-				<input class='regform' type="date" name="birthday">
+				<%= f.label :loc, 'Location' %>
+				<%= f.text_field :location %>
+				<%= f.label :birth , 'Birthday' %>
+				<%= f.date_field :birthday %>
 			</div>
 			<div class="formpart">
-				<label class='regform'>Bio:</label>
-				<textarea class='regform' name="bio" maxlength="150"></textarea>
+				<%= f.label :b , 'Bio' %>
+				<%= f.text_area :bio, input_html: { class: "form-control", maxlength: "150", required: true }%>
 			</div>
-			<button type=submit id="signin">Submit</button>
-		</form>
+			<%= f.submit input_html: { id: "signin"} %>
+		<% end %>
 	</div>
 </body>

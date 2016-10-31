@@ -7,20 +7,15 @@ class UsersController < ApplicationController
 
 
 	def create
+
 		#/users -> post request
 		#create a user -add them to the database
 		@thingy = User.where(email: params[:email]).first
 		if @thingy == nil
-			User.create(
-				email: params[:email],
-				password: params[:password],
-				fname: params[:fname],
-				lname: params[:lname],
-				location: params[:location],
-				bio: params[:bio],
-				birthday: params[:birthday].to_s,
-				joined_at: DateTime.now
-			)
+
+			params[:joined_at]= DateTime.now
+			@user = User.new(user_params)
+			@user.save
 			redirect_to '/'
 		else
 			flash[:alert] = "A user already exists with that email!"
@@ -32,6 +27,7 @@ class UsersController < ApplicationController
 	def new
 		#/users/new
 		#show user sign up page - register
+		@user = User.new
 	end
 
 	def edit
@@ -43,14 +39,8 @@ class UsersController < ApplicationController
 	def editing
 		User.update(
 			session[:user_id],
-			email: params[:email],
-            password: params[:password],
-            fname: params[:fname],
-            lname: params[:lname],
-           	location: params[:location],
-            bio: params[:bio],
-            birthday: params[:birthday],
-			)
+			user_params
+		)
 		redirect_to '/home/feed'
 	end
 
@@ -68,4 +58,10 @@ class UsersController < ApplicationController
 		User.delete(params[:id])
 		redirect_to '/'
 	end
+
+	private
+
+	def user_params
+	    params.require(:user).permit(:email, :password, :fname, :lname, :location, :bio, :birthday)
+    end
 end
