@@ -6,17 +6,23 @@
 </head>
 <body>
 	<div style="width: 350px; "><%=image_tag "logo.png" %></div>
-	<h1>Welcome, <%= @user.fname %>!</h1>
+	
 	<div id="menu">
 		<a href='/users/<%= @user.id %>'><div class="menuIcons">Profile</div></a>
 		<a href='/users/<%= @user.id %>/edit'><div class="menuIcons">Settings</div></a>
 	</div>
+
 	<div id="feedPoster">
+	<h1>Welcome, <%= @user.fname %>!</h1>
 		<div>
 			<form  method="post" action='/posts'>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<input type="text" name="ptitle" placeholder="Title..." required>
-				<textarea name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+				<div>
+					<input class="posterBox" type="text" name="ptitle" placeholder="Title..." required>
+				</div>
+				<div>
+				<textarea class="posterBox" name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+				</div>
 	 			<button type=submit id="signin">Post</button>
 			</form>
 		</div>
@@ -24,11 +30,10 @@
 		<h1>Timeline:</h1>
 		<div id="userPosts">
 
-
 			<% (Post.all).reverse.each do |x| %>
 			<% @y = User.where(id: x.user_id).first %>
 			<% @count = Comment.where(post_id: x.id).length %>
-				<a href="/posts/<%= x.id %>"><div style="border: 1px solid black; width: 400px; text-align: center">
+				<a href="/posts/<%= x.id %>"><div style="border: 1px solid black; width: 100%; text-align: center">
 			  		<h2><%= x.title %></h2>
 			  		<a href="/users/<%= @y.id %>"><h3><%= @y.fname %> <%= @y.lname %></h3></a>
 			  		<p><%= x.text %></p>

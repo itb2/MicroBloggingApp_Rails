@@ -1,7 +1,35 @@
 body{
 	background-color: whitesmoke;
+	text-align: center;
 }
 img{
 	max-width:100%;
 	max-height:100%;
+}
+
+.posterBox{
+	width: 500px;
+
+}
+#postBox{
+	height: 170px;
+}
+#menu a{
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	font-size: 2em;
+}
+#menu{
+	position: absolute;
+	right: 0px;
+	top: 120px;
+}
+#feedPoster{
+	position: relative;
+	top:100px;
+}
+#userPosts{
+	width: 600px;
+	margin: 0 auto;
 }

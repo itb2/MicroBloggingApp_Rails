@@ -12,14 +12,14 @@ class UsersController < ApplicationController
 		@thingy = User.where(email: params[:email]).first
 		if @thingy == nil
 			User.create(
-			email: params[:email],
-			password: params[:password],
-			fname: params[:fname],
-			lname: params[:lname],
-			location: params[:location],
-			bio: params[:bio],
-			birthday: params[:birthday].to_s,
-			joined_at: DateTime.now
+				email: params[:email],
+				password: params[:password],
+				fname: params[:fname],
+				lname: params[:lname],
+				location: params[:location],
+				bio: params[:bio],
+				birthday: params[:birthday].to_s,
+				joined_at: DateTime.now
 			)
 			redirect_to '/'
 		else
@@ -42,14 +42,15 @@ class UsersController < ApplicationController
 
 	def editing
 		User.update(
-		email: params[:email],
-		password: params[:password],
-		fname: params[:fname],
-		lname: params[:lname],
-		location: params[:location],
-		bio: params[:bio],
-		birthday: params[:birthday],
-		)
+			session[:user_id],
+			email: params[:email],
+            password: params[:password],
+            fname: params[:fname],
+            lname: params[:lname],
+           	location: params[:location],
+            bio: params[:bio],
+            birthday: params[:birthday],
+			)
 		redirect_to '/home/feed'
 	end
 
@@ -67,5 +68,4 @@ class UsersController < ApplicationController
 		User.delete(params[:id])
 		redirect_to '/'
 	end
-
 end
