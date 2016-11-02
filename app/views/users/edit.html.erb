@@ -3,40 +3,43 @@
 <head>
 	<title>User Settings</title>
 </head>
-<body>
+<body style="background-color: #203859;">
+	<div style="width: 400px; "><%=image_tag "Logomakr_0xScaT.png" %></div>
 	<div id="menu">
-		<a href='/home/feed'><div class="menuIcons">Home</div></a>
-		<a href='/sign-out'><div class="menuIcons">Log Out</div></a>
+		<a href='/home/feed'><div class="menuIcons"><%=image_tag "activity.png" %></div></a>
+		<a href='/sign-out'><div class="menuIcons"><%=image_tag "logout.png" %></div></a>
 	</div>
 
-	
-	<form method='post' action='/users/<%= @user.id %>/edit'>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-			<div class="formpart">
-				<label class="regform">First Name:</label>
-				<input class='regform' type="name" name="fname" value="<%= @user.fname %>" required>
-				<label class='regform'>Last Name:</label>
-				<input class='regform' type="name" name="lname" value="<%= @user.lname %>" required>
-			</div>
-			<div class="formpart">
-				<label class='regform'>Email:</label>
-				<input class='regform' type="email" name="email" value="<%= @user.email %>" required>
-				<label class='regform'>Password:</label>
-				<input class='regform' type="password" name="password"  value="<%= @user.password %>" required>
-			</div>
-			<div class="formpart">
-				<label class='regform'>Location</label>
-				<input class='regform' type="text" name="location" value="<%= @user.location %>">
-				<label class='regform'>Birthday</label>
-				<input class='regform' type="date" name="birthday" value=<%= @user.birthday %> >
-			</div>
-			<div class="formpart">
-				<label class='regform'>Bio:</label>
-				<input class='regform' name="bio" type="bio" value="<%= @user.bio %>"></input>
-			</div>
-			<button type=submit id="signin">Update</button>
-	</form>
-	<%= button_to 'DELETE ACCOUNT', @user, :method => 'delete', data: { confirm: 'Are you sure?' } %>
-
+	<div id="feedPoster" style="color: red; text-align: center;">
+		<div id="hi" style="color: black; text-align: left; margin-bottom: 150px; background-color: #e3e3e3; padding-top: 30px; padding-left: 20px; padding-bottom: 20px; margin-top: 40px;">
+			<form method='post' action='/users/<%= @user.id %>/edit'>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+					<div class="formpart">
+						<label class="regform">First Name:</label>
+						<input class='regform' type="name" name="fname" value="<%= @user.fname %>" required>
+						<label class='regform'>Last Name:</label>
+						<input class='regform' type="name" name="lname" value="<%= @user.lname %>" required>
+					</div>
+					<div class="formpart">
+						<label class='regform'>Email:</label>
+						<input class='regform' type="email" name="email" value="<%= @user.email %>" required>
+						<label class='regform' style="margin-left: 47px;">Password:</label>
+						<input class='regform' type="password" name="password"  value="<%= @user.password %>" required>
+					</div>
+					<div class="formpart">
+						<label class='regform'>Location:</label>
+						<input class='regform' type="text" name="location" value="<%= @user.location %>">
+						<label class='regform' style="margin-left: 19px;">Birthday:</label>
+						<input class='regform' type="date" name="birthday" value=<%= @user.birthday %> >
+					</div>
+					<div class="formpart">
+						<label class='regform'>Bio:</label>
+						<input class='regform' name="bio" type="bio" value="<%= @user.bio %>"></input>
+					</div>
+					<button type=submit id="signin" style="left: 250px;">Save</button>
+			</form>
+		</div>
+		<%= button_to 'DELETE ACCOUNT', @user, :method => 'delete', data: { confirm: 'Are you sure?' }%>
+	</div>
 </body>
 </html>

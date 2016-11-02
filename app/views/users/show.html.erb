@@ -4,22 +4,37 @@
 	<title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body>
-	<div id="menu2">
-		<a href='/home/feed'><div class="menuIcons">Home</div></a>
-		<a href='/sign-out'><div class="menuIcons">Log Out</div></a>
+<body style="background-color: #203859;">
+	<div style="width: 400px; "><%=image_tag "Logomakr_0xScaT.png" %></div>
+	<div id="menu">
+		<a href='/home/feed'><div class="menuIcons"><%=image_tag "activity.png" %></div></a>
+		<a href='/sign-out'><div class="menuIcons"><%=image_tag "logout.png" %></div></a>
 		
 	</div>
+
 	<div id="feedPoster">
-	<h1><%= @user1.fname %> <%= @user1.lname %></h1>
-	<label><strong>Location: </strong></label><p><%= @user1.location %>  </p>
-	<label><strong>Birthday: </strong></label><p><%= @user1.birthday %></p><br/>
-	<label><strong>Bio: </strong></label><p><%= @user1.bio %></p>
-	<div>
-			<form  method="post" action='/posts'>
+	<div id="userInfo">
+
+		<h1><%= @user1.fname %> <%= @user1.lname %></h1>
+		<div style="display: inline-block; height:50px; margin-right: 20px; margin-top: 20px; vertical-align:top">
+		<label><strong>Location: </strong></label><p><%= @user1.location %>  </p>
+		</div>
+		<div style="display: inline-block; height:50px; margin-top: 20px;">
+		<label><strong>Birthday: </strong></label><p><%= @user1.birthday %></p><br/>
+		</div>
+		<div>
+		<label><strong>Bio: </strong></label><p><%= @user1.bio %></p>
+		</div>
+	</div>
+		<div id="hi">
+			<form  method="post" action='/posts' style="color:black">
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<input type="text" name="ptitle" placeholder="Title..." required>
-				<textarea name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+				<div>
+				<input class="posterBox" type="text" name="ptitle" placeholder="Title..." required>
+				</div>
+				<div>
+				<textarea class="posterBox" name="post" id="postBox" maxlength="150" placeholder="Type your post here... " required></textarea>
+				</div>
 	 			<button type=submit id="signin">Post</button>
 			</form>
 		</div>
@@ -27,19 +42,28 @@
 		<h1>Post Feed:</h1>
         <h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
 		<div id="userPosts">
+
 			<% Post.where(user_id: @user1.id).reverse.each do |x| %>
 				<% @count = Comment.where(post_id: x.id).length %>
 			    <% @y = User.where(id: x.user_id).first %>
-				<a href="/posts/<%= x.id %>"><div style="border: 1px solid black; width: 400px; text-align: center;">
-					<%= button_to 'DELETE', x, :method => 'delete' %>
-			  		<h2><%= x.title %></h2>
-			  		<h3><%= @y.fname %> <%= @y.lname %></h3></a>
-			  		<p><%= x.text %></p>
-			  		<p><%= @count %> comment(s)</p>
-			  		<p><%= x.posted_at %></p>
-			  	</div></a>
+			    <div style="background-color: whitesmoke; border: 1px solid grey; width: 100%; color: black; text-align: left">
+			    	<div style="display: inline-block; position: relative; left: 10px; width:170px; margin-top: 10px;">
+				    	<%=image_tag "message1.png" %>
+				    	<h3><%= @y.fname %> <%= @y.lname %></h3></a>
+				    </div>
+				    <div style="display: inline-block; position: relative; left: 20px; top: 10px;vertical-align: top; width: 350px">
+					    <%= button_to 'Delete', x, :method => 'delete', :id => 'dbutton', data: { confirm: 'Are you sure?' }%>
+					    <h4><%= x.title %></h4>
+					    <p><%= x.text %></p>
+				  		<a href="/posts/<%= x.id %>" style="display: inline-block;margin-left: 10px;"><p><%= @count %> comment(s)</p></a>
+				  		<p style="display: inline-block;"><%= x.posted_at %></p>
+				  		
+			  		</div>
+			  	</div>
 			<% end %>
-	</div>	</div>
+		</div>
+	</div>
+
 
 
 

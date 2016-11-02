@@ -1,20 +1,25 @@
-body{
-	background-color: whitesmoke;
-	text-align: center;
-}
+
 img{
 	max-width:100%;
 	max-height:100%;
 }
-
 .posterBox{
-	width: 500px;
-
+	width: 600px;
+}
+#userInfo{
+	margin: 0 auto;
+	width:500px;
+	text-align: center;
+}
+#hi{
+	margin-left: 25px;
+	margin-top: 30px;
 }
 #postBox{
 	height: 170px;
 }
 #menu a{
+	color: #e3e3e3;
 	display: inline-block;
 	margin-bottom: 10px;
 	margin-right: 10px;
@@ -26,10 +31,59 @@ img{
 	top: 120px;
 }
 #feedPoster{
+	color: #e3e3e3;
 	position: relative;
 	top:100px;
-}
-#userPosts{
-	width: 600px;
+	width: 650px;
 	margin: 0 auto;
 }
+#signin{
+	font-size: 1.5em;
+	position: relative;
+	left: 540px;
+	color: black;
+}
+#dbutton{
+	position: relative;
+	left: 390px;
+}
+.regform{
+	font-size: 1.3em;
+}
+.regform label{
+	color:#e3e3e3;
+}
+#wrapper{
+	color: #e3e3e3;
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.3em;
+	margin-top: 100px;
+}
+#wrapper2{
+	color: black;
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.3em;
+	margin-top: 100px;
+}
+#wrapper2 label{
+	color:#e3e3e3;
+}
+#wrapper button,
+#wrapper input{
+	color: black;
+}
+#signInForm button{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.formpart2{
+	width: 300px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+

@@ -3,15 +3,15 @@
 <head>
 	<title>Welcome to Bloggy</title>
 </head>
-<body>
+<body style="background-color: #203859;">
 
-	<%=image_tag "logo.png" %>
+	<div style="width: 400px; margin: 0 auto"><%=image_tag "Logomakr_0xScaT.png" %></div>
 
 	<div id='wrapper'>
 		
 		<div id="sign-in">
 			<h4 style="color:red"> <%= flash[:alert] if flash[:alert] %> </h4>
-			<form id="signInform" method='post' action='/login'>
+			<form id="signInForm" method='post' action='/login'>
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 				<div class="inputs">
 					<label class="welcPg">Email:</label>
@@ -21,15 +21,13 @@
 					<label class="welcPg" >Password:</label>
 					<input class="welcPg" type="password" name="password" required>
 				</div>
-				<button id="signin" type="Submit" name='Submit'>Sign In</button>
+				<button type="Submit" name='Submit'>Sign In</button>
 			</form>
 
 		</div>
 		<div id="reg">
 			<p id="regLink">Don't have an account? <a href="/users/new">Click Here To Register >> </a></p>
 		</div>
-
-
 
 	</div>
 

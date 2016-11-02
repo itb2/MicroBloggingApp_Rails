@@ -3,31 +3,45 @@
 <head>
 	<title>Bloggy: Register</title>
 </head>
-<body>
-	<div id="regwrap">
-		<a href="/"> << back </a>
-		<h1>Register For Bloggy: Your own personal Blog Space</h1>
+<body style="background-color: #203859;">
+	<div style="width: 400px; "><%=image_tag "Logomakr_0xScaT.png" %></div>
+	<a href="/"> << back </a>
+	<div id="wrapper2">
+		
+		<h3>Register For Bloggy: Your own personal Blog Space</h3>
 		<h4 style="color:red"> <%= flash[:alert] if flash[:alert] %> </h4>
 		<%= form_for(@user) do |f| %>
-			<div class="formpart">
+			<div class="formpart2" >
+				<div>
 				<%= f.label :first , 'First Name' %>
 				<%= f.text_field :fname, required: true%>
+				</div>
+				<div>
 				<%= f.label :last , 'Last Name' %>
 				<%= f.text_field :lname %>
+				</div>
 			</div>
-			<div class="formpart">
+			<div class="formpart2">
+				<div>
 				<%= f.label :email%>
 				<%= f.email_field :email %>
+				</div>
+				<div>
 				<%= f.label :password %>
 				<%= f.password_field :password %>
+				</div>
 			</div>
-			<div class="formpart">
+			<div class="formpart2">
+				<div>
 				<%= f.label :loc, 'Location' %>
 				<%= f.text_field :location %>
+				</div>
+				<div>
 				<%= f.label :birth , 'Birthday' %>
 				<%= f.date_field :birthday %>
+				</div>
 			</div>
-			<div class="formpart">
+			<div class="formpart2">
 				<%= f.label :b , 'Bio' %>
 				<%= f.text_area :bio, input_html: { class: "form-control", maxlength: "150", required: true }%>
 			</div>
