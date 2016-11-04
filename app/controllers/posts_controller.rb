@@ -9,15 +9,18 @@ class PostsController < ApplicationController
 		#/posts -> post request
 		#create a post -add them to the database
 		@user = User.where(id: session[:user_id]).first
-		Post.create(
+		@p = Post.new(
 			user: @user,
 			text: params[:post],
 			title: params[:ptitle],
 			posted_at: DateTime.now
 
 	    )
-
-	    redirect_to :back
+	    if !@p.save
+	    	flash[:notice] = "Invalid Post: You must include all required fields and be a registered user!"
+	   	end
+		
+		redirect_to :back
 	end
 
 	def new

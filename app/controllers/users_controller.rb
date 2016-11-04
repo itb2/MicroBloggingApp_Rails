@@ -15,8 +15,12 @@ class UsersController < ApplicationController
 
 			params[:joined_at]= DateTime.now
 			@user = User.new(user_params)
-			@user.save
-			redirect_to '/'
+			if !@user.save
+				flash[:alert] = "Invalid User"
+				redirect_to :back
+			else
+				redirect_to '/'
+			end
 		else
 			flash[:alert] = "A user already exists with that email!"
 			redirect_to :back
@@ -37,11 +41,12 @@ class UsersController < ApplicationController
 	end
 
 	def editing
-		User.update(
-			session[:user_id],
-			user_params
-		)
-		redirect_to '/home/feed'
+		if !User.update(session[:user_id], user_params)
+			flash[:alert] = "Invalid Input"
+			redirect_to :back
+		else
+			redirect_to '/home/feed'
+		end
 	end
 
 
