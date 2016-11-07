@@ -4,16 +4,15 @@ img{
 	max-height:100%;
 }
 .posterBox{
-	width: 600px;
+	width: 650px;
 }
 #userInfo{
 	margin: 0 auto;
 	width:500px;
 	text-align: center;
 }
-#hi{
-	margin-left: 25px;
-	margin-top: 30px;
+#hi{	
+	margin-top: 20px;
 }
 #postBox{
 	height: 170px;
@@ -25,6 +24,11 @@ img{
 	margin-right: 10px;
 	font-size: 2em;
 }
+#header{
+	width: 100%;
+	height: 170px;
+	border-bottom: 3px solid beige;
+}
 #menu{
 	position: absolute;
 	right: 0px;
@@ -33,14 +37,14 @@ img{
 #feedPoster{
 	color: #e3e3e3;
 	position: relative;
-	top:100px;
+	top:50px;
 	width: 650px;
 	margin: 0 auto;
 }
 #signin{
 	font-size: 1.5em;
 	position: relative;
-	left: 540px;
+
 	color: black;
 }
 #dbutton{
@@ -84,6 +88,13 @@ img{
 	width: 300px;
 	margin: 0 auto;
 	text-align: left;
+}
+#commentBox{
+	width: 250px;
+	border-bottom: 1px solid black;
+	padding: 20px;
+	margin: 10px;
+
 }
 
 

@@ -5,13 +5,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body style="background-color: #203859;">
+	<div id="header">
 	<div style="width: 400px; "><%=image_tag "Logomakr_0xScaT.png" %></div>
 	<div id="menu">
 		<a href='/home/feed'><div class="menuIcons"><%=image_tag "activity.png" %></div></a>
 		<a href='/sign-out'><div class="menuIcons"><%=image_tag "logout.png" %></div></a>
 		
 	</div>
-
+	</div>
 	<div id="feedPoster">
 	<div id="userInfo">
 
@@ -46,7 +47,7 @@
 			<% Post.where(user_id: @user1.id).reverse.each do |x| %>
 				<% @count = Comment.where(post_id: x.id).length %>
 			    <% @y = User.where(id: x.user_id).first %>
-			    <div style="background-color: whitesmoke; border: 1px solid grey; width: 100%; color: black; text-align: left">
+			    <div style="background-color: beige; border: 1px solid grey; width: 100%; color: black; text-align: left">
 			    	<div style="display: inline-block; position: relative; left: 10px; width:170px; margin-top: 10px;">
 				    	<%=image_tag "message1.png" %>
 				    	<h3><%= @y.fname %> <%= @y.lname %></h3></a>

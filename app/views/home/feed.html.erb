@@ -5,13 +5,14 @@
 	
 </head>
 <body style="background-color: #203859;">
+	<div id="header">
 	<div style="width: 500px; "><%=image_tag "Logomakr_7FRJwQ" %></div>
 	
 	<div id="menu">
 		<a href='/users/<%= @user.id %>'><div class="menuIcons"><%=image_tag "profile.png" %></div></a>
 		<a href='/users/<%= @user.id %>/edit'><div class="menuIcons"><%=image_tag "settings.png" %></div></a>
 	</div>
-
+	</div>
 	<div id="feedPoster">
 		<h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
 		<div id="hi">
@@ -34,7 +35,7 @@
 			<% (Post.all).reverse.each do |x| %>
 			<% @y = User.where(id: x.user_id).first %>
 			<% @count = Comment.where(post_id: x.id).length %>
-				<div style="background-color: whitesmoke; border: 1px solid grey; width: 100%; color: black; text-align: left">
+				<div style="background-color: beige; border: 1px solid grey; width: 100%; color: black; text-align: left">
 					<div style="display: inline-block; position: relative; left: 10px; width:170px; margin-top: 10px;">
 						<%=image_tag "message1.png" %>
 						<a href="/users/<%= @y.id %>"><h3><%= @y.fname %> <%= @y.lname %></h3></a>

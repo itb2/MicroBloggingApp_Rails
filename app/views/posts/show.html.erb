@@ -3,33 +3,36 @@
 <head>
 	<title>View Post</title>
 </head>
-<body>
+<body style="background-color: #203859;">
+	<div style="width: 400px; "><%=image_tag "Logomakr_0xScaT.png" %></div>
 	<a href="/home/feed"> << back </a>
-	<h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
-	<h1><%= @post.title %></h1>
-	<a href="/users/<%= @author.id %>"><p>by <%= @author.fname %> <%= @author.lname %></p></a>
-	<p><%= @post.text %></p>
-	<%= button_to 'DELETE', @post, :method => 'delete' %>
-	<p><%= @post.posted_at %></p>
-	<h2>Comments:</h2>
-	<div id="comments">
-			<% Comment.where(post_id: @post.id).each do |x| %>
-			    <% @y = User.where(id: x.user_id).first %>
-				<div id="commentBoxt">
-					<%= button_to 'DELETE', x, :method => 'delete' %>
-			  		<h5><%= @y.fname %> <%= @y.lname %></h5></a>
-			  		<p><%= x.text %></p>
-			  		<p><%= x.posted_at %></p>
-			  	</div>
-			<% end %>
+	<div id="feedPoster" style="color: black">
+		<h4 style="color:red"> <%= flash[:notice] if flash[:notice] %> </h4>
+		<h3 style="color: white"><%= @post.title %></h3>
+		<a href="/users/<%= @author.id %>" style=><p>by <%= @author.fname %> <%= @author.lname %></p></a>
+		<p style="font-size: 1.5em; color: white"><%= @post.text %></p>
+		<p><%= @post.posted_at %></p>
+		<%= button_to 'DELETE', @post, :method => 'delete' %>
+		<h2>Comments:</h2>
+		<div id="comments">
+				<% Comment.where(post_id: @post.id).each do |x| %>
+				    <% @y = User.where(id: x.user_id).first %>
+					<div id="commentBox">
+						
+				  		<h5><%= @y.fname %> <%= @y.lname %></h5></a>
+				  		<p><%= x.text %></p>
+				  		<p style="display: inline-block"><%= x.posted_at %></p>
+				  		<%= button_to 'X', x, :method => 'delete' %>
+				  	</div>
+				<% end %>
+		</div>
+		
+		<form  method="post" action='/comments'>
+			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			<input type="hidden" name="pid" value=<%= @post.id %> style="display:none">
+			<textarea name="comment" id="cBox" maxlength="150" placeholder="Type your comment here... " required></textarea>
+			<button type=submit style="height: 45px; position: relative; bottom: 18px;">Post</button>
+		</form>
 	</div>
-	
-	<form  method="post" action='/comments'>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-		<input type="hidden" name="pid" value=<%= @post.id %> style="display:none">
-		<textarea name="comment" id="cBox" maxlength="150" placeholder="Type your comment here... " required></textarea>
-		<button type=submit>Post</button>
-	</form>
-
 </body>
 </html>
